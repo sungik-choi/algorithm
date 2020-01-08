@@ -3,15 +3,15 @@
  * @return {number}
  */
 const reverse = integer => {
-    const str = String(integer);
+    let str = String(integer);
     const negativeSign = "-"
     const signDigit = str.substr(0, 1);
     let isNegative = false;
     let reverseInteger = "";
 
     if (signDigit === negativeSign) {
-        str.replace(negativeSign, "");
-        console.log(str);
+        const pureNum = str.replace(negativeSign, "");
+        str = pureNum;
         isNegative = true;
     }
 
@@ -19,8 +19,9 @@ const reverse = integer => {
         reverseInteger += str.substr(str.length - i - 1, 1);
     }
 
-    if (isNegative) Number(negativeSign + reverseInteger);
+    if (isNegative) return Number(negativeSign + reverseInteger);
     return Number(reverseInteger);
 };
 
-console.log(reverse(23));
+console.log(reverse(23243000000));
+console.log(Number("-" + "13"));
