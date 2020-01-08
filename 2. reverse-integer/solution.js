@@ -3,25 +3,24 @@
  * @return {number}
  */
 const reverse = integer => {
-    let str = String(integer);
-    const negativeSign = "-"
-    const signDigit = str.substr(0, 1);
-    let isNegative = false;
+    let strInteger = String(integer);
     let reverseInteger = "";
+    let isNegative = false;
+    const negativeSign = "-"
+    const signDigit = strInteger.substr(0, 1);
+    const integerLimit = 2147483648;
 
     if (signDigit === negativeSign) {
-        const pureNum = str.replace(negativeSign, "");
-        str = pureNum;
+        const pureNum = strInteger.replace(negativeSign, "");
+        strInteger = pureNum;
         isNegative = true;
     }
 
-    for (let i = 0; i < str.length; i += 1) {
-        reverseInteger += str.substr(str.length - i - 1, 1);
+    for (let i = 0; i < strInteger.length; i += 1) {
+        reverseInteger += strInteger.substr(strInteger.length - i - 1, 1);
     }
 
-    if (isNegative) return Number(negativeSign + reverseInteger);
-    return Number(reverseInteger);
+    if (Math.abs(parseInt(reverseInteger, 10)) > integerLimit) return 0;
+    if (isNegative) return parseInt(negativeSign + reverseInteger, 10);
+    return parseInt(reverseInteger, 10);
 };
-
-console.log(reverse(23243000000));
-console.log(Number("-" + "13"));
