@@ -1,5 +1,5 @@
 //
-//  kNumber.js
+//  kth-Number.js
 //  programers
 //
 //  Created by Sungik-Choi on 2020/01/15.
