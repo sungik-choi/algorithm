@@ -1,3 +1,10 @@
+//
+//  kNumber.js
+//  programers
+//
+//  Created by Sungik-Choi on 2020/01/15.
+//
+
 const getNthNum = (targetArray, command) => {
   const sliceStartNum = command[0] - 1;
   const sliceEndNum = command[1];
@@ -16,12 +23,3 @@ const solution = (targetArray, commandArray) => {
   }
   return nthNumArray;
 };
-
-solution(
-  [1, 5, 2, 6, 3, 7, 4],
-  [
-    [2, 5, 3],
-    [4, 4, 1],
-    [1, 7, 3],
-  ],
-);
