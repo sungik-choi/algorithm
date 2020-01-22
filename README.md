@@ -1,2 +1,2 @@
 # algorithm
-알고리즘을 학습합니다.
+Learning Algorithm 알고리즘 공부
