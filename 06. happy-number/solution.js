@@ -17,4 +17,3 @@ const isHappy= num => {
   }
   return true;
 }
-

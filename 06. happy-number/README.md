@@ -16,7 +16,29 @@ Explanation:
 
 ---
 
-## 나의 풀이
+## 풀이
+
+```JavaScript
+const addSquares = num => {
+  let sum = 0;
+  String(num).split('').forEach(digit => sum += Number(digit) ** 2);
+  return sum;
+}
+
+const isHappy = num => {
+  const numberMap = new Map();
+  let sum = addSquares(num);
+
+  while (sum !== 1) {
+    if (numberMap.get(sum) === 'cycle') {
+      return false
+    }
+    numberMap.set(sum, 'cycle');
+    sum = addSquares(sum);
+  }
+  return true;
+}
+```
 
 1. 입력된 `number`를 `string`으로 만든 후, `split`으로 쪼개서 그들을 제곱한 `sum`을 반환하는 함수 제작.
 
