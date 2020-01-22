@@ -4,7 +4,7 @@ const addSquares = num => {
   return sum;
 }
 
-const isHappy= num => {
+const isHappy = num => {
   const numberMap = new Map();
   let sum = addSquares(num);
 
