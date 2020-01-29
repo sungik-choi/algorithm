@@ -1,52 +1,50 @@
 class Node {
-  constructor(data, left, right) {
+  constructor(data, nodeMap) {
     this.data = data;
-    this.left = left;
-    this.right = right;
+    this.left = nodeMap.get(data)[0] === '.' ? null : nodeMap.get(data)[0];
+    this.right = nodeMap.get(data)[1] === '.' ? null : nodeMap.get(data)[1];
   }
 }
 
 class Tree {
   constructor() {
     this.root = null;
-    this.nodeArr = [];
+    this.nodeMap = new Map();
     this.orderStr = '';
   }
 
-  setRoot(node) {
-    this.root = node;
+  setRoot(data) {
+    this.root = new Node(data, this.nodeMap);
   }
 
   getRoot() {
     return this.root;
   }
 
-  makeNode(data, left, right) {
-    if (left === '.') left = null;
-    if (right === '.') right = null;
-    return new Node(data, left, right);
+  makeNode(data) {
+    return data === null ? null : new Node(data, this.nodeMap);
   }
 
   inOrder(node) {
     if (node !== null) {
-      this.inOrder(node.left);
+      this.inOrder(this.makeNode(node.left));
       this.orderStr += node.data;
-      this.inOrder(node.right);
+      this.inOrder(this.makeNode(node.right));
     }
   }
 
   preOrder(node) {
     if (node !== null) {
       this.orderStr += node.data;
-      this.preOrder(node.left);
-      this.preOrder(node.right);
+      this.preOrder(this.makeNode(node.left));
+      this.preOrder(this.makeNode(node.right));
     }
   }
 
   postOrder(node) {
     if (node !== null) {
-      this.postOrder(node.left);
-      this.postOrder(node.right);
+      this.postOrder(this.makeNode(node.left));
+      this.postOrder(this.makeNode(node.right));
       this.orderStr += node.data;
     }
   }
@@ -68,16 +66,23 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-// solve
-const solve = arr => {
+const printSolution = arr => {
   const t = new Tree();
   for (let index = 0; index < arr.length; index++) {
     const data = arr[index].split(' ')[0];
     const left = arr[index].split(' ')[1];
     const right = arr[index].split(' ')[2];
-    t.nodeArr.push(t.makeNode(data, left, right));
+    t.nodeMap.set(data, [left, right]);
   }
-  console.log(t.nodeArr);
+
+  // console.log
+  t.setRoot('A');
+  t.preOrder(t.getRoot());
+  t.print();
+  t.inOrder(t.getRoot());
+  t.print();
+  t.postOrder(t.getRoot());
+  t.print();
 };
 
 rl.on('line', input => {
@@ -86,21 +91,7 @@ rl.on('line', input => {
   if (testcaseNum === count) rl.close();
   count++;
 }).on('close', () => {
-  // solve
-  solve(inputs);
+  // printSolution
+  printSolution(inputs);
   process.exit();
 });
-
-//   test() {
-//     this.t.setRoot(this.nA);
-//     this.t.preOrder(this.t.getRoot())
-//     this.t.print();
-//     this.t.inOrder(this.t.getRoot());
-//     this.t.print();
-//     this.t.postOrder(this.t.getRoot());
-//     this.t.print();
-//   }
-// }
-
-// const test = new Test();
-// test.test();
