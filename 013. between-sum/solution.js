@@ -1,24 +1,17 @@
-function add(arr) {
-  const array = arr;
-  const size = arr.length - 1;
-  const maxNum = arr[size];
-  const targetNum = arr[size - 1];
-  console.log(arr);
-  if (targetNum + 1 >= maxNum) {
-    return array.reduce((acc, cur) => {
-      return acc + cur;
-    });
-  }
-  array.splice(size, 0, targetNum + 1);
-  return add(array);
-}
-
 function solution(a, b) {
+  let answer = 0;
+  let smallNum;
+  let bigNum;
   if (a === b) return a;
-  const arr = [a, b].sort((a, b) => {
-    return a - b;
-  });
-  return add(arr);
+  if (a > b) {
+    smallNum = b;
+    bigNum = a;
+  } else if (a < b) {
+    smallNum = a;
+    bigNum = b;
+  }
+  for (let i = smallNum; i <= bigNum; i += 1) {
+    answer += i;
+  }
+  return answer;
 }
-
-console.log(solution(1000000, -1000000));
